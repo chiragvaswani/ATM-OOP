@@ -98,7 +98,7 @@ class WithdrawAmount : public Transaction {
             return false;
         } else {
             amount -= withdrawAmount;
-            cout << withdrawAmount << " withdrawn." << endl;
+            cout << withdrawAmount << " withdrawn.\n";
             return true;
         }
     }
