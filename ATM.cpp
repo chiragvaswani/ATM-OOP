@@ -13,4 +13,9 @@ class Bank {
         name = "HDFC";
         address = "Bank address";
     }
+
+    void getDetails() {
+        cout << "Bank code: " << code << endl << "Bank name: " << name << endl << "Bank address: " << address << endl;
+    }
+
 }
