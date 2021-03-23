@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <fstream>
+#include <sstream>
 
 using namespace std;
 
@@ -51,11 +53,12 @@ class Bank {
 
 
 class DebitCard {
+    public:
     double accountNumber;
     int pin;
 
     DebitCard(int Pin) {
-        pin = Pin
+        pin = Pin;
     }
 
     DebitCard(int Pin, double accNum) {
@@ -74,7 +77,7 @@ class Transaction {
     static int amount;
     double accountNumber;
     int pin;
-    sring type, date; // Deposit or Withdrawal
+    string type, date; // Deposit or Withdrawal
 
     Transaction() {
         date = "23/03/2021";
@@ -119,7 +122,7 @@ class Customer {
     string name, type;
     double accountNumber;
 
-    Customer(string name, string type, double accountNumber) {
+    Customer(string name, double accountNumber, string type ) {
         this->name = name;
         this->type = type;
         this->accountNumber = accountNumber;
@@ -143,12 +146,59 @@ class Account {
     }
 
     void checkBalance() {
-        cout << "Name: " << name << endl;
+        cout << "Name: " << owner << endl;
         cout << "Account No: " << accountNumber << endl;
         cout << "Balance: " << Transaction::amount << endl;
     }
 
 } account("null", "na", 0) ;
+
+class Admin {
+    public:
+    string name, email, line;
+    int userCount;
+    Customer *c[20];
+	DebitCard *d[20];
+	Account *account[20];
+	Transaction *t[20];
+	ofstream write;
+
+    Admin() {
+        name = "Chirag Vaswani";
+        email = "chirag.vaswani19@vit.edu";
+        userCount = 0;
+    }
+
+    bool addCustomer(string name, double accountNumber, string type, int pin) {
+        if (userCount < 20) {
+            c[userCount] = new Customer(name, accountNumber, type);
+            while (!write.eof()) {
+                write.open("customers.txt", ios::app); // Ability to move around the file
+                write << name << " " << type << " " << accountNumber << "." << endl;
+                write.close();
+                return true;
+            }
+
+            account[userCount] = new Account(type, name, accountNumber);
+            d[userCount] = new DebitCard(accountNumber, pin);
+            t[userCount] = new Transaction(accountNumber, type, pin);
+            userCount++;
+            return true;
+
+        } else {
+            cout << "Error! Exceeded maximum number of users for this admin." << endl;
+            return false;
+        }
+    }
+
+
+    void getDetails() {
+        cout << "Name: " << name << endl;
+        cout << "Email: " << email << endl;
+        cout << "Customers added: " << userCount << endl;
+    }
+
+} admin;
 
 int main() {
     int option, pin, amount, optionAdmin;
