@@ -148,7 +148,7 @@ class Account {
         cout << "Balance: " << Transaction::amount << endl;
     }
 
-};
+} account("null", "na", 0) ;
 
 int main() {
     int option, pin, amount, optionAdmin;
@@ -218,11 +218,58 @@ int main() {
 
     } else if (option == 2) {
         // Normal user
+        pin:
+        cout << "Enter PIN: ";
+        cin >> pin;
+
+        if (!card.verifyPin(pin)) goto pin;
+        else {
+            verified:
+            system("cls");
+            bank.userMenu();
+            cin >> optionAdmin;
+
+            switch(optionAdmin) {
+                case 1: cout << "Enter deposit amount: ";
+                        cin >> amount;
+                        deposit.Deposit(amount);
+                        goto verified;
+                        break;
+
+                case 2: cout << "Enter withdrawal amount: ";
+                        cin >> amount;
+                        withdraw.Withdraw(amount);
+                        goto verified;
+                        break;
+
+                case 3: account.checkBalance();
+                        goto verified;
+                        break;
+
+                case 4: customer.getDetails();
+                        goto verified;
+                        break;
+
+                case 5: bank.getDetails();
+                        goto verified;
+                        break;
+
+                case 6: admin.getDetails();
+                        goto verified;
+                        break;
+
+                default: cout << "Invalid input. Try again.";
+                         goto verified;
+                         break;
+            }
+        }
+
+
     } else {
         cout << "Invalid command. Try again." << endl;
         goto start;
     }
 
-
+    return 0;
 
 }
