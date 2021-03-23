@@ -129,5 +129,23 @@ class Customer {
         cout << "Name: " << name << endl << "Account no: " << accountNumber << endl << "Type: " << type << endl << "Current Balance: " << Transaction::amount << endl;
     }
 
-}
+};
+
+class Account {
+    string type, owner;
+    double accountNumber;
+
+    Account(string type, string owner, double accountNumber) {
+        this->type = type;
+        this->owner = owner;
+        this->accountNumber = accountNumber;
+    }
+
+    void checkBalance() {
+        cout << "Name: " << name << endl;
+        cout << "Account No: " << accountNumber << endl;
+        cout << "Balance: " << Transaction::amount << endl;
+    }
+
+};
 
