@@ -125,6 +125,9 @@ class Customer {
         this->accountNumber = accountNumber;
     }
 
+    void getDetails() {
+        cout << "Name: " << name << endl << "Account no: " << accountNumber << endl << "Type: " << type << endl << "Current Balance: " << Transaction::amount << endl;
+    }
 
 }
 
