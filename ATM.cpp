@@ -33,7 +33,13 @@ class Bank {
     }
 
     void userMenu() {
-
+        system("cls");
+		cout << "1. Deposit Amount" << endl;
+		cout << "2. Withdraw Amount" << endl;
+		cout << "3. Check balance" << endl;
+		cout << "4. My information" << endl;
+		cout << "5. Bank Information" << endl;
+		cout << "6. Admin Info" << endl;
     }
 
 }
