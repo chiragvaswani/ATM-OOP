@@ -44,7 +44,7 @@ class Bank {
 
     bool password(string pass) {
         string password = "thisIsPassword";
-        return pass.compare(password);
+        return !pass.compare(password);
     }
 
 }
