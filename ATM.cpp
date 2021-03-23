@@ -47,4 +47,19 @@ class Bank {
         return !pass.compare(password);
     }
 
+} bank;
+
+
+class DebitCard {
+    double accountNumber;
+    int pin;
+
+    DebitCard(int Pin) {
+        pin = Pin
+    }
+
+    DebitCard(int Pin, double accNum) {
+        pin = Pin;
+        accountNumber = accNum;
+    }
 }
