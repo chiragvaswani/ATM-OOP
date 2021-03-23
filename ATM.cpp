@@ -18,4 +18,8 @@ class Bank {
         cout << "Bank code: " << code << endl << "Bank name: " << name << endl << "Bank address: " << address << endl;
     }
 
+    void startMenu() {
+        cout << "\tATM System" << endl << "Select user category - " << endl << "1. Admin\n2. User" << endl;
+    }
+
 }
