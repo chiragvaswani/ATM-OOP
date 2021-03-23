@@ -104,3 +104,13 @@ class WithdrawAmount : public Transaction {
     }
 } withdraw;
 
+
+class DepositAmount : public Transaction {
+    public:
+    void Deposit(int depositAmount) {
+        cout << depositAmount << " deposited." << endl;
+        amount += depositAmount;
+    }
+} deposit;
+
+
