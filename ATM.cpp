@@ -25,7 +25,7 @@ class Bank {
     }
 
     void adminMenu() {
-        system("cls");
+        system("clear");
 		cout << "1. Add customer" << endl;
 		cout << "2. Current Customer details" << endl;
 		cout << "3. My details" << endl;
@@ -35,7 +35,7 @@ class Bank {
     }
 
     void userMenu() {
-        system("cls");
+        system("clear");
 		cout << "1. Deposit Amount" << endl;
 		cout << "2. Withdraw Amount" << endl;
 		cout << "3. Check balance" << endl;
@@ -128,8 +128,24 @@ class Customer {
         this->accountNumber = accountNumber;
     }
 
+    bool loadCustomers() {
+		double exit;
+        char ch;
+		ifstream read;
+		read.open("customers.txt");
+		while (!read.eof()) {
+			ch = read.get();
+			cout << ch;
+		}
+		read.close();
+		return true;
+	}
+
     void getDetails() {
         cout << "Name: " << name << endl << "Account no: " << accountNumber << endl << "Type: " << type << endl << "Current Balance: " << Transaction::amount << endl;
+        cout << "Press any key to go back to the menu." << endl;
+        cin >> exit;
+        if (exit) return;
     }
 
 } customer("Andrew", 123455, "current");
@@ -137,7 +153,7 @@ class Customer {
 class Account {
     public:
     string type, owner;
-    double accountNumber;
+    double accountNumber, exit;
 
     Account(string type, string owner, double accountNumber) {
         this->type = type;
@@ -149,6 +165,9 @@ class Account {
         cout << "Name: " << owner << endl;
         cout << "Account No: " << accountNumber << endl;
         cout << "Balance: " << Transaction::amount << endl;
+        cout << "Press any key to go back to the menu." << endl;
+        cin >> exit;
+        if (exit) return;
     }
 
 } account("null", "na", 0) ;
@@ -196,12 +215,15 @@ class Admin {
         cout << "Name: " << name << endl;
         cout << "Email: " << email << endl;
         cout << "Customers added: " << userCount << endl;
+        cout << "Press any key to go back to the menu." << endl;
+        cin >> exit;
+        if (exit) return;
     }
 
 } admin;
 
 int main() {
-    int option, pin, amount, optionAdmin;
+    int option, pin, amount, optionAdmin, random;
     string password, type, name, transactionOption;
     double accountNumber;
     bool result;
@@ -209,7 +231,7 @@ int main() {
     start:
     bank.startMenu();
     cin >> option;
-    system("cls");
+    system("clear");
 
     if (option == 1) {
         // Admin
@@ -225,7 +247,7 @@ int main() {
         bank.adminMenu();
         cin >> optionAdmin;
         switch(optionAdmin) {
-            case 1: system("cls");
+            case 1: system("clear");
                     cout << "Enter the following details\n";
                     cout << "Name: ";
                     cin >> name;
@@ -257,7 +279,7 @@ int main() {
                     break;
 
             case 6: goto start;
-                    system("cls");
+                    system("clear");
                     break;
 
             default: cout << "Invalid input. Try again.";
@@ -275,7 +297,7 @@ int main() {
         if (!card.verifyPin(pin)) goto pin;
         else {
             verified:
-            system("cls");
+            system("clear");
             bank.userMenu();
             cin >> optionAdmin;
 
