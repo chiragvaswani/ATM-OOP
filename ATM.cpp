@@ -114,3 +114,17 @@ class DepositAmount : public Transaction {
 } deposit;
 
 
+class Customer {
+    public:
+    string name, type;
+    double accountNumber;
+
+    Customer(string name, string type, double accountNumber) {
+        this->name = name;
+        this->type = type;
+        this->accountNumber = accountNumber;
+    }
+
+
+}
+
