@@ -7,6 +7,7 @@ using namespace std;
 
 class Bank {
     int code;
+    char exit;
     string name, address;
 
     public:
@@ -18,6 +19,13 @@ class Bank {
 
     void getDetails() {
         cout << "Bank code: " << code << endl << "Bank name: " << name << endl << "Bank address: " << address << endl;
+        cout << "Press x to go back to the menu." << endl;
+        burp:
+        cin >> exit;
+        if (exit == 'x') return;
+        else {
+            goto burp;
+        }
     }
 
     void startMenu() {
@@ -25,7 +33,7 @@ class Bank {
     }
 
     void adminMenu() {
-        system("clear");
+        // system("clear");
 		cout << "1. Add customer" << endl;
 		cout << "2. Current Customer details" << endl;
 		cout << "3. My details" << endl;
@@ -35,7 +43,7 @@ class Bank {
     }
 
     void userMenu() {
-        system("clear");
+        // system("clear");
 		cout << "1. Deposit Amount" << endl;
 		cout << "2. Withdraw Amount" << endl;
 		cout << "3. Check balance" << endl;
@@ -121,6 +129,7 @@ class Customer {
     public:
     string name, type;
     double accountNumber;
+    char exit;
 
     Customer(string name, double accountNumber, string type ) {
         this->name = name;
@@ -129,7 +138,6 @@ class Customer {
     }
 
     bool loadCustomers() {
-		double exit;
         char ch;
 		ifstream read;
 		read.open("customers.txt");
@@ -143,9 +151,9 @@ class Customer {
 
     void getDetails() {
         cout << "Name: " << name << endl << "Account no: " << accountNumber << endl << "Type: " << type << endl << "Current Balance: " << Transaction::amount << endl;
-        cout << "Press any key to go back to the menu." << endl;
+        cout << "Press x to go back to the menu." << endl;
         cin >> exit;
-        if (exit) return;
+        if (exit == 'x') return;
     }
 
 } customer("Andrew", 123455, "current");
@@ -174,6 +182,7 @@ class Account {
 
 class Admin {
     public:
+    int exit;
     string name, email, line;
     int userCount;
     Customer *c[20];
@@ -282,7 +291,7 @@ int main() {
                     system("clear");
                     break;
 
-            default: cout << "Invalid input. Try again.";
+            default: cout << "Invalid input. Try again." << endl;
                      goto correct;
                      break;
 
@@ -296,8 +305,8 @@ int main() {
 
         if (!card.verifyPin(pin)) goto pin;
         else {
-            verified:
             system("clear");
+            verified:
             bank.userMenu();
             cin >> optionAdmin;
 
@@ -330,7 +339,7 @@ int main() {
                         goto verified;
                         break;
 
-                default: cout << "Invalid input. Try again.";
+                default: cout << "Invalid input. Try again." << endl;
                          goto verified;
                          break;
             }
@@ -338,7 +347,7 @@ int main() {
 
 
     } else {
-        cout << "Invalid command. Try again." << endl;
+        cout << "Invalid command. Try again.\n" << endl;
         goto start;
     }
 
