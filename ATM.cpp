@@ -132,6 +132,7 @@ class Customer {
 };
 
 class Account {
+    public:
     string type, owner;
     double accountNumber;
 
@@ -149,3 +150,13 @@ class Account {
 
 };
 
+int main() {
+    int option, pin, amount, optionAdmin;
+    string password, type, name, transactionOption;
+    double accountNumber;
+    bool result;
+
+    start:
+
+
+}
