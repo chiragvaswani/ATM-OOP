@@ -22,4 +22,18 @@ class Bank {
         cout << "\tATM System" << endl << "Select user category - " << endl << "1. Admin\n2. User" << endl;
     }
 
+    void adminMenu() {
+        system("cls");
+		cout << "1. Add customer" << endl;
+		cout << "2. Current Customer details" << endl;
+		cout << "3. My details" << endl;
+		cout << "4. Bank Details" << endl;
+		cout << "5. Load Customers" << endl;
+		cout << "6. Return to Main Menu" << endl;
+    }
+
+    void userMenu() {
+
+    }
+
 }
