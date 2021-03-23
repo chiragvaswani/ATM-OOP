@@ -50,6 +50,7 @@ class Bank {
 		cout << "4. My information" << endl;
 		cout << "5. Bank Information" << endl;
 		cout << "6. Admin Info" << endl;
+        cout << "7. Return to Main Menu" << endl;
     }
 
     bool password(string pass) {
@@ -337,6 +338,10 @@ int main() {
 
                 case 6: admin.getDetails();
                         goto verified;
+                        break;
+
+                case 7: goto start;
+                        system("clear");
                         break;
 
                 default: cout << "Invalid input. Try again." << endl;
