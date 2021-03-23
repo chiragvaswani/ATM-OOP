@@ -66,4 +66,26 @@ class DebitCard {
     bool verifyPin(int Pin) {
         return pin == Pin;
     }
-}
+} card(0000);
+
+
+class Transaction {
+    public:
+    static int amount;
+    double accountNumber;
+    int pin;
+    sring type, date; // Deposit or Withdrawal
+
+    Transaction() {
+        date = "23/03/2021";
+    }
+
+    Transaction(double accountNumber, string type, int pin) {
+        this->accountNumber = accountNumber;
+        this->type = type;
+        this->pin = pin;
+    }
+
+};
+
+int Transaction::amount = 0;
