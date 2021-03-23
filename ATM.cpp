@@ -62,4 +62,8 @@ class DebitCard {
         pin = Pin;
         accountNumber = accNum;
     }
+
+    bool verifyPin(int Pin) {
+        return pin == Pin;
+    }
 }
