@@ -89,3 +89,18 @@ class Transaction {
 };
 
 int Transaction::amount = 0;
+
+class WithdrawAmount : public Transaction {
+    public:
+    bool Withdraw(int withdrawAmount) {
+        if (amount - withdrawAmount < 0) {
+            cout << "Insufficient Balance." << endl;
+            return false;
+        } else {
+            amount -= withdrawAmount;
+            cout << withdrawAmount << " withdrawn." << endl;
+            return true;
+        }
+    }
+} withdraw;
+
