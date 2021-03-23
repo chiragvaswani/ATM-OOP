@@ -42,4 +42,9 @@ class Bank {
 		cout << "6. Admin Info" << endl;
     }
 
+    bool password(string pass) {
+        string password = "thisIsPassword";
+        return pass.compare(password);
+    }
+
 }
