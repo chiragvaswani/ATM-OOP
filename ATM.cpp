@@ -129,7 +129,7 @@ class Customer {
         cout << "Name: " << name << endl << "Account no: " << accountNumber << endl << "Type: " << type << endl << "Current Balance: " << Transaction::amount << endl;
     }
 
-};
+} customer("Andrew", 123455, "current");
 
 class Account {
     public:
@@ -157,6 +157,72 @@ int main() {
     bool result;
 
     start:
+    bank.startMenu();
+    cin >> option;
+    system("cls");
+
+    if (option == 1) {
+        // Admin
+        back:
+        cout << "Enter password: ";
+        cin >> password;
+        if (!bank.password(password)) {
+            cout << "Incorrect password. Try again." << endl;
+            goto back;
+        }
+
+        correct:
+        bank.adminMenu();
+        cin >> optionAdmin;
+        switch(optionAdmin) {
+            case 1: system("cls");
+                    cout << "Enter the following details\n";
+                    cout << "Name: ";
+                    cin >> name;
+                    cout << "Account no: ";
+                    cin >> accountNumber;
+                    cout << "Type: ";
+                    cin >> type;
+                    cout << "PIN: ";
+                    cin >> pin;
+                    admin.addCustomer(name, accountNumber, type, pin);
+                    cout << "Customer added successfully." << endl;
+                    goto correct;
+                    break;
+
+            case 2: customer.getDetails();
+                    goto correct;
+                    break;
+
+            case 3: admin.getDetails();
+                    goto correct;
+                    break;
+
+            case 4: bank.getDetails();
+                    goto correct;
+                    break;
+
+            case 5: customer.loadCustomers();
+                    goto correct;
+                    break;
+
+            case 6: goto start;
+                    system("cls");
+                    break;
+
+            default: cout << "Invalid input. Try again.";
+                     goto correct;
+                     break;
+
+        }
+
+    } else if (option == 2) {
+        // Normal user
+    } else {
+        cout << "Invalid command. Try again." << endl;
+        goto start;
+    }
+
 
 
 }
