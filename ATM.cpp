@@ -20,11 +20,11 @@ class Bank {
     void getDetails() {
         cout << "Bank code: " << code << endl << "Bank name: " << name << endl << "Bank address: " << address << endl;
         cout << "Press x to go back to the menu." << endl;
-        burp:
+        loop:
         cin >> exit;
         if (exit == 'x') return;
         else {
-            goto burp;
+            goto loop;
         }
     }
 
@@ -102,6 +102,7 @@ class Transaction {
 
 int Transaction::amount = 0;
 
+
 class WithdrawAmount : public Transaction {
     public:
     bool Withdraw(int withdrawAmount) {
@@ -128,12 +129,13 @@ class DepositAmount : public Transaction {
 
 class Customer {
     public:
-    string name, type;
+    string firstName, lastName, type;
     double accountNumber;
     char exit;
 
-    Customer(string name, double accountNumber, string type ) {
-        this->name = name;
+    Customer(string firstName, string lastName, double accountNumber, string type ) {
+        this->firstName = firstName;
+        this->lastName = lastName;
         this->type = type;
         this->accountNumber = accountNumber;
     }
@@ -151,18 +153,19 @@ class Customer {
 	}
 
     void getDetails() {
-        cout << "Name: " << name << endl << "Account no: " << accountNumber << endl << "Type: " << type << endl << "Current Balance: " << Transaction::amount << endl;
+        cout << "Name: " << firstName << " " << lastName << endl << "Account no: " << accountNumber << endl << "Type: " << type << endl << "Current Balance: " << Transaction::amount << endl;
         cout << "Press x to go back to the menu." << endl;
         cin >> exit;
         if (exit == 'x') return;
     }
 
-} customer("Andrew", 123455, "current");
+} customer("Andrew", "N", 123455, "current");
 
 class Account {
     public:
     string type, owner;
-    double accountNumber, exit;
+    double accountNumber;
+    char exit;
 
     Account(string type, string owner, double accountNumber) {
         this->type = type;
@@ -174,16 +177,16 @@ class Account {
         cout << "Name: " << owner << endl;
         cout << "Account No: " << accountNumber << endl;
         cout << "Balance: " << Transaction::amount << endl;
-        cout << "Press any key to go back to the menu." << endl;
+        cout << "Press x to go back to the menu." << endl;
         cin >> exit;
-        if (exit) return;
+        if (exit == 'x') return;
     }
 
-} account("null", "na", 0) ;
+} account("current", "Andrew N", 123455) ;
 
 class Admin {
     public:
-    int exit;
+    char exit;
     string name, email, line;
     int userCount;
     Customer *c[20];
@@ -193,17 +196,16 @@ class Admin {
 	ofstream write;
 
     Admin() {
-        name = "Chirag Vaswani";
-        email = "chirag.vaswani19@vit.edu";
+        name = "Group 1";
+        email = "group1@vit.edu";
         userCount = 0;
     }
 
-    bool addCustomer(string name, double accountNumber, string type, int pin) {
-        if (userCount < 20) {
-            c[userCount] = new Customer(name, accountNumber, type);
+    bool addCustomer(string firstName, string lastName, double accountNumber, string type, int pin) {
+            c[userCount] = new Customer(firstName, lastName, accountNumber, type);
             while (!write.eof()) {
                 write.open("customers.txt", ios::app); // Ability to move around the file
-                write << name << " " << type << " " << accountNumber << "." << endl;
+                write << firstName << " " << lastName << endl<< type << endl << accountNumber << endl << endl;
                 write.close();
                 return true;
             }
@@ -212,20 +214,16 @@ class Admin {
             d[userCount] = new DebitCard(accountNumber, pin);
             t[userCount] = new Transaction(accountNumber, type, pin);
             userCount++;
+            cout << userCount;
             return true;
 
-        } else {
-            cout << "Error! Exceeded maximum number of users for this admin." << endl;
-            return false;
-        }
     }
 
 
     void getDetails() {
         cout << "Name: " << name << endl;
         cout << "Email: " << email << endl;
-        cout << "Customers added: " << userCount << endl;
-        cout << "Press any key to go back to the menu." << endl;
+        cout << "Press x to go back to the menu." << endl;
         cin >> exit;
         if (exit) return;
     }
@@ -234,9 +232,10 @@ class Admin {
 
 int main() {
     int option, pin, amount, optionAdmin, random;
-    string password, type, name, transactionOption;
+    string password, type, firstName, lastName, transactionOption;
     double accountNumber;
     bool result;
+
 
     start:
     bank.startMenu();
@@ -259,15 +258,17 @@ int main() {
         switch(optionAdmin) {
             case 1: system("clear");
                     cout << "Enter the following details\n";
-                    cout << "Name: ";
-                    cin >> name;
+                    cout << "First Name: ";
+                    cin >> firstName;
+                    cout << "Last Name: ";
+                    cin >> lastName;
                     cout << "Account no: ";
                     cin >> accountNumber;
                     cout << "Type: ";
                     cin >> type;
                     cout << "PIN: ";
                     cin >> pin;
-                    admin.addCustomer(name, accountNumber, type, pin);
+                    admin.addCustomer(firstName, lastName, accountNumber, type, pin);
                     cout << "Customer added successfully." << endl;
                     goto correct;
                     break;
@@ -299,6 +300,9 @@ int main() {
         }
 
     } else if (option == 2) {
+
+        // Optional - Can load a database here.
+
         // Normal user
         pin:
         cout << "Enter PIN: ";
