@@ -86,7 +86,7 @@ class Transaction {
     static int amount;
     double accountNumber;
     int pin;
-    string type, date; // Deposit or Withdrawal
+    string type, date; // Current or Savings
 
     Transaction() {
         date = "23/03/2021";
@@ -205,7 +205,7 @@ class Admin {
             c[userCount] = new Customer(firstName, lastName, accountNumber, type);
             while (!write.eof()) {
                 write.open("customers.txt", ios::app); // Ability to move around the file
-                write << firstName << " " << lastName << endl<< type << endl << accountNumber << endl << endl;
+                write << "24/03/2021" << endl <<firstName << " " << lastName << endl<< type << endl << accountNumber << endl << endl;
                 write.close();
                 return true;
             }
